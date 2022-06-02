@@ -49,7 +49,7 @@ const Alert = styled.p`
 `
 
 export const TasksList = () => {
-  const { todoList } = useContext(CountriesContext);
+  const { todoList, clearCompleted } = useContext(CountriesContext);
   const [todoFiltered, setTodoFiltered] = useState([]);
   const [filter, setfilter] = useState('All');
 
@@ -75,7 +75,7 @@ export const TasksList = () => {
           <BtnFilter type="button" filter={filter} value={"Active"} onClick={({target}) => setfilter(target.value)}/>
           <BtnFilter type="button" filter={filter} value={"Completed"} onClick={({target}) => setfilter(target.value)}/>
         </div>
-        <input type="button" value={"Clear Completed"} />
+        <input type="button" value={"Clear Completed"} onClick={ () => clearCompleted() }/>
       </ListOptions>
     </>
   );

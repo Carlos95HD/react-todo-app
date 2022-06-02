@@ -27,6 +27,10 @@ export const todoReducer = (state, action) => {
       );
       return { todoList: updatedTodoList };
     }
+    case types.ClearCompleted: {
+      const updatedTodoList = state.todoList.filter( todoItem => !todoItem.completed );
+      return { todoList: updatedTodoList };
+    }
 
     default:
       return state;

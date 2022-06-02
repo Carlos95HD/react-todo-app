@@ -31,6 +31,9 @@ export const CountriesProvider = ({ children }) => {
     },
     markAsCompleted: (todoItemId) => {
       dispatch({ type: types.ToggleCompleted, todoItemId });
+    },
+    clearCompleted: () => {
+      dispatch({ type: types.ClearCompleted });
     }
   };
 
