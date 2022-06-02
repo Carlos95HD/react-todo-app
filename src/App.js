@@ -5,7 +5,7 @@ import { GlobalStyles } from "./styled-components/GlobalStyles/GlobalStyles";
 import Toggle from "./styled-components/Layout/Toggler";
 import { TasksList } from "./components/TasksList";
 import { AddTasks } from "./components/AddTasks";
-import { Header } from "./styled-components/Layout/Header";
+import { Header, Title } from "./styled-components/Layout/Header";
 import { CountriesProvider } from "./todo/TodoContext";
 
 const App = () => {
@@ -18,10 +18,10 @@ const App = () => {
   
           <GlobalStyles />
           <Header>
-            <div>
+            <Title>
               <h1>TODO</h1>
               <Toggle theme={theme} toggleTheme={themeToggler} />
-            </div>
+            </Title>
             {/* input to add todo */}
             <AddTasks />
           </Header>

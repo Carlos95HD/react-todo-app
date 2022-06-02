@@ -22,8 +22,9 @@ export const darkStyles = {
 export const lightTheme = {
   bg_primary: lightStyles.Very_Light_Grayish_Blue,
   bg_secondary: lightStyles.Very_Light_Gray,
-  text_primary: darkStyles.Dark_Grayish_Blue,
+  text_primary: darkStyles.Very_Dark_Blue,
   text_secondary: darkStyles.Light_Grayish_Blue,
+  text_gray: lightStyles.Dark_Grayish_Blue,
   background: `url(${bgDesktopLight})`
 }
 
@@ -32,5 +33,6 @@ export const darkTheme = {
   bg_secondary: darkStyles.Very_Dark_Desaturated_Blue,
   text_primary: darkStyles.Light_Grayish_Blue,
   text_secondary: lightStyles.Very_Dark_Grayish_Blue,
+  text_gray: lightStyles.Dark_Grayish_Blue,
   background: `url(${bgDesktopDark})`
 }

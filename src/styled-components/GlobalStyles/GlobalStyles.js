@@ -8,7 +8,8 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0px;
   }
 
-  body {
+  body,
+  input{
     background: ${({ theme }) => theme.bg_primary};
     color: ${({ theme }) => theme.text_primary};
     font-family: 'Josefin Sans', sans-serif;
@@ -17,11 +18,23 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   h1{
-    color: ${ lightStyles.Very_Light_Gray };
+    color: ${lightStyles.Very_Light_Gray};
     font-weight: 700;
   }
 
   p{
     font-weight: 400;
   }
+
+  input{
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+  }
+
+  ::placeholder{
+      color: ${({ theme }) => theme.text_gray};
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 18px;
+    }
   `;

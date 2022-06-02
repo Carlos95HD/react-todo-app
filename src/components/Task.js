@@ -7,9 +7,10 @@ const Checking = styled.button`
   cursor: pointer;
   border: ${({ theme }) => `1px solid ${theme.text_secondary}`};
   border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
-  padding: 10px;
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: 8px;
+  margin-right: 1rem;
 
   ${({ completed }) =>
     completed &&
@@ -37,6 +38,11 @@ const TaskLi = styled.li`
   justify-content: space-between;
   padding: 1rem;
 
+  & div {
+    display: flex;
+    align-items: center;
+  }
+
   & p {
     ${({ theme }) => `color: ${theme.text_primary}`};
     ${({ completed, theme }) =>
@@ -52,19 +58,21 @@ export const Task = ({ id, completed, task }) => {
   const { markAsCompleted, removeTodoItem } = useContext(CountriesContext);
   return (
     <TaskLi completed={completed}>
-      <Checking onClick={() => markAsCompleted(id)} completed={completed}>
-        {completed && (
-          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
-            <path
-              fill="none"
-              stroke="#FFF"
-              strokeWidth="2"
-              d="M1 4.304L3.696 7l6-6"
-            />
-          </svg>
-        )}
-      </Checking>
-      <p>{task}</p>
+      <div>
+        <Checking onClick={() => markAsCompleted(id)} completed={completed}>
+          {completed && (
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
+              <path
+                fill="none"
+                stroke="#FFF"
+                strokeWidth="2"
+                d="M1 4.304L3.696 7l6-6"
+              />
+            </svg>
+          )}
+        </Checking>
+        <p>{task}</p>
+      </div>
       <DeleteButton onClick={() => removeTodoItem(id)}>
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">
           <path
