@@ -5,13 +5,17 @@ export const todoReducer = (state, action) => {
     case types.AddTask:
       return {
         todoList: [
-          ...state.todoList,
           {
             id: new Date().valueOf(),
             task: action.todoItemTask,
             completed: false,
           },
+          ...state.todoList,
         ],
+      };
+    case types.ListUpdate:
+      return {
+        todoList: action.todoList,
       };
     case types.DeleteTask: {
       const filteredTodoItem = state.todoList.filter(
@@ -28,7 +32,9 @@ export const todoReducer = (state, action) => {
       return { todoList: updatedTodoList };
     }
     case types.ClearCompleted: {
-      const updatedTodoList = state.todoList.filter( todoItem => !todoItem.completed );
+      const updatedTodoList = state.todoList.filter(
+        (todoItem) => !todoItem.completed
+      );
       return { todoList: updatedTodoList };
     }
 

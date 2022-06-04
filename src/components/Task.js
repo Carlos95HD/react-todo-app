@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { CountriesContext } from "../todo/TodoContext";
+import {Draggable} from "react-beautiful-dnd";
 
 const Checking = styled.button`
   background: none;
@@ -54,34 +55,43 @@ const TaskLi = styled.li`
   }
 `;
 
-export const Task = ({ id, completed, task }) => {
+export const Task = ({todo:{ id, completed, task}, index}) => {
   const { markAsCompleted, removeTodoItem } = useContext(CountriesContext);
   return (
-    <TaskLi completed={completed}>
-      <div>
-        <Checking onClick={() => markAsCompleted(id)} completed={completed}>
-          {completed && (
-            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
+    <Draggable key={id} draggableId={id.toString()} index={index}>
+      {(provided) => (
+        <TaskLi 
+          completed={completed}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <div>
+            <Checking onClick={() => markAsCompleted(id)} completed={completed}>
+              {completed && (
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
+                  <path
+                    fill="none"
+                    stroke="#FFF"
+                    strokeWidth="2"
+                    d="M1 4.304L3.696 7l6-6"
+                  />
+                </svg>
+              )}
+            </Checking>
+            <p>{task}</p>
+          </div>
+          <DeleteButton onClick={() => removeTodoItem(id)}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">
               <path
-                fill="none"
-                stroke="#FFF"
-                strokeWidth="2"
-                d="M1 4.304L3.696 7l6-6"
+                fill="#494C6B"
+                fillRule="evenodd"
+                d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
               />
             </svg>
-          )}
-        </Checking>
-        <p>{task}</p>
-      </div>
-      <DeleteButton onClick={() => removeTodoItem(id)}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">
-          <path
-            fill="#494C6B"
-            fillRule="evenodd"
-            d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"
-          />
-        </svg>
-      </DeleteButton>
-    </TaskLi>
+          </DeleteButton>
+        </TaskLi>
+      )}
+    </Draggable> 
   );
 };

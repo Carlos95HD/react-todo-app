@@ -1,21 +1,11 @@
 import { createContext, useReducer } from "react";
 import { types } from "../types/types";
 import { todoReducer } from "./todoReducer";
+import { todos } from "../data/todos";
 
 export const CountriesContext = createContext();
 const initialState = {
-  todoList: [
-    {
-      completed: false,
-      id: 21312,
-      task: 'Drink water'
-    },
-    {
-      completed: true,
-      id: 212312,
-      task: 'Clean up'
-    },
-]
+  todoList: todos,
 };
 
 export const CountriesProvider = ({ children }) => {
@@ -24,7 +14,7 @@ export const CountriesProvider = ({ children }) => {
   const value = {
     todoList: state.todoList,
     addTodoItem: (todoItemTask) => {
-      dispatch({ type: types.AddTask , todoItemTask });
+      dispatch({ type: types.AddTask, todoItemTask });
     },
     removeTodoItem: (todoItemId) => {
       dispatch({ type: types.DeleteTask, todoItemId });
@@ -34,14 +24,15 @@ export const CountriesProvider = ({ children }) => {
     },
     clearCompleted: () => {
       dispatch({ type: types.ClearCompleted });
-    }
+    },
+    updateList: (todoList) => {
+      dispatch({ type: types.ListUpdate, todoList });
+    },
   };
 
   return (
-    <CountriesContext.Provider
-      value={value}
-    >
+    <CountriesContext.Provider value={value}>
       {children}
     </CountriesContext.Provider>
-  )
+  );
 };

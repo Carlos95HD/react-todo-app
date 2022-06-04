@@ -1,9 +1,66 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Droppable, DragDropContext } from "react-beautiful-dnd";
+import styled from "styled-components";
 import { CountriesContext } from "../todo/TodoContext";
 import { Task } from "./Task";
-import styled from "styled-components";
-import { useState } from "react";
-import { filterItem } from "../helpers/filterItem";
+import { filterItem} from "../helpers/filterItem";
+import { reorderItems, reorderItemsFiltered } from "../helpers/reorderItems";
+
+export const TasksList = () => {
+  const { todoList, clearCompleted, updateList } = useContext(CountriesContext);
+  const [ todoFiltered, setTodoFiltered ] = useState([]);
+  const [ filter, setfilter ] = useState('All');
+
+  useEffect(() => {
+    const itemsFiltered = filterItem(todoList, filter);
+    setTodoFiltered(itemsFiltered)
+  }, [filter, todoList])
+  
+  const handleOnDragEnd = ( result ) => {
+    if (!result.destination) return;
+    const selectedIndex = result.source.index;
+    const destineIndex = result.destination.index;
+    let reoreredList;
+
+    if (filter === "All") {
+      reoreredList = reorderItems( todoList, selectedIndex, destineIndex);
+      updateList(reoreredList)
+    } else {
+      reoreredList = reorderItems( todoFiltered, selectedIndex, destineIndex);
+      //Update list in context
+      const newList = reorderItemsFiltered( todoFiltered ,todoList, selectedIndex, destineIndex)
+      updateList(newList);
+    }
+
+    setTodoFiltered(reoreredList)
+  }
+  const itemsLeft = todoList?.filter(todo => !todo.completed);
+
+  return (
+    <DragDropContext onDragEnd={handleOnDragEnd}>
+      <Droppable droppableId="todos">
+        {(provided) => (
+          <TaskUl {...provided.droppableProps} ref={provided.innerRef}>
+            {!todoFiltered.length && <Alert>{`There are no items ${filter !== "All" ? filter.toLocaleLowerCase() : ''}`}</Alert> }
+            {todoFiltered.map((todo, index) => (
+              <Task key={todo.id} todo={todo} index={index} />
+            ))}
+            {provided.placeholder}
+          </TaskUl>
+        )}
+      </Droppable>
+      <ListOptions>
+        <p>{itemsLeft.length} Items left</p>
+        <div>
+          <BtnFilter type="button" filter={filter} value={"All"} onClick={({target}) => setfilter(target.value)}/>
+          <BtnFilter type="button" filter={filter} value={"Active"} onClick={({target}) => setfilter(target.value)}/>
+          <BtnFilter type="button" filter={filter} value={"Completed"} onClick={({target}) => setfilter(target.value)}/>
+        </div>
+        <input type="button" value={"Clear Completed"} onClick={ () => clearCompleted() }/>
+      </ListOptions>
+    </DragDropContext>
+  );
+};
 
 const TaskUl = styled.ul`
   background: ${({ theme }) => theme.bg_secondary};
@@ -47,36 +104,3 @@ const Alert = styled.p`
   justify-content: space-between;
   padding: 2rem 2rem;
 `
-
-export const TasksList = () => {
-  const { todoList, clearCompleted } = useContext(CountriesContext);
-  const [todoFiltered, setTodoFiltered] = useState([]);
-  const [filter, setfilter] = useState('All');
-
-  useEffect(() => {
-    const itemsFiltered = filterItem(todoList, filter);
-    setTodoFiltered(itemsFiltered)
-  }, [filter, todoList])
-  
-  const itemsLeft = todoList?.filter(todo => !todo.completed);
-
-  return (
-    <>
-      <TaskUl>
-        {todoFiltered.length === 0 && <Alert>{`There are no items ${filter !== "All" ? filter.toLocaleLowerCase() : ''}`}</Alert>}
-        {todoFiltered.map((todo) => (
-          <Task key={todo.id} {...todo} />
-        ))}
-      </TaskUl>
-      <ListOptions>
-        <p>{itemsLeft.length} Items left</p>
-        <div>
-          <BtnFilter type="button" filter={filter} value={"All"} onClick={({target}) => setfilter(target.value)}/>
-          <BtnFilter type="button" filter={filter} value={"Active"} onClick={({target}) => setfilter(target.value)}/>
-          <BtnFilter type="button" filter={filter} value={"Completed"} onClick={({target}) => setfilter(target.value)}/>
-        </div>
-        <input type="button" value={"Clear Completed"} onClick={ () => clearCompleted() }/>
-      </ListOptions>
-    </>
-  );
-};
