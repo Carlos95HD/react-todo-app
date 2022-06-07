@@ -17,6 +17,10 @@ const FormTodo = styled.form`
   -webkit-box-shadow: 0px 12px 34px -2px rgba(0, 0, 0, 0.13);
   -moz-box-shadow: 0px 12px 34px -2px rgba(0, 0, 0, 0.13);
 
+  @media screen and (max-width: 768px) {
+    width: 90%;
+  }
+
   & input {
     background: none;
     width: 100%;

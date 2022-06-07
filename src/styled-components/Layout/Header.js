@@ -18,6 +18,10 @@ export const Title = styled.div`
   padding-top: 4rem;
   padding-bottom: 3rem;
   width: 38%;
+  
+  @media screen and (max-width: 768px) {
+    width: 90%;
+  }
 
   & h1 {
     letter-spacing: 1rem;
