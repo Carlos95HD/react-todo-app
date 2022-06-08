@@ -39,8 +39,8 @@ export const TasksList = () => {
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <Droppable droppableId="todos">
-        {(provided) => (
-          <TaskUl {...provided.droppableProps} ref={provided.innerRef}>
+        {(provided, snapshot) => (
+          <TaskUl {...provided.droppableProps} ref={provided.innerRef} snapshot={snapshot}>
             {!todoFiltered.length && <Alert>{`There are no items ${filter !== "All" ? filter.toLocaleLowerCase() : ''}`}</Alert> }
             {todoFiltered.map((todo, index) => (
               <Task key={todo.id} todo={todo} index={index} />
@@ -74,6 +74,14 @@ const TaskUl = styled.ul`
   box-shadow: 0px 12px 15px -2px rgba(0, 0, 0, 0.13);
   transition: all 0.5s linear;
 
+  ${({ snapshot, theme }) => snapshot.isDraggingOver && `
+    background: ${theme.text_secondary};
+  `}
+
+  li:first-child{
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+
   @media screen and (max-width: 768px) {
     width: 90%;
   }
@@ -97,6 +105,7 @@ const ListOptions = styled.div`
   transition: all 0.5s linear;
 
   @media screen and (max-width: 768px) {
+    font-size: 14px;
     flex-wrap: wrap;
     width: 90%;
   }

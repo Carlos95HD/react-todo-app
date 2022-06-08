@@ -49,12 +49,13 @@ const DeleteButton = styled.button`
 `;
 
 const TaskLi = styled.li`
-  /* background: ${({ theme }) => theme.bg_secondary}; */
+  background: ${({ theme }) => theme.bg_secondary};
   align-items: center;
   border-bottom: ${({ theme }) => `1px solid ${theme.text_secondary}`};
   display: flex;
   justify-content: space-between;
   padding: 1rem;
+  transition: background 0.5s linear;
 
   & div {
     display: flex;
@@ -62,6 +63,7 @@ const TaskLi = styled.li`
   }
 
   & p {
+    word-break: break-all;
     ${({ theme }) => `color: ${theme.text_primary}`};
     ${({ completed, theme }) =>
       completed &&
@@ -70,20 +72,24 @@ const TaskLi = styled.li`
       text-decoration-line: line-through; 
     `};
   }
+
+  ${({ isDraggable, theme }) => isDraggable && `
+    background: ${theme.bg_secondary};
+    opacity: 0.85;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border: 1px solid ${theme.text_secondary}
+    `
+  }
 `;
 
-const TaskText = styled.div`
-  p{
-    word-break: break-all;
-  }
-`
 export const Task = ({todo:{ id, completed, task}, index}) => {
   const { markAsCompleted, removeTodoItem } = useContext(CountriesContext);
   return (
     <Draggable key={id} draggableId={id.toString()} index={index}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <TaskLi 
           completed={completed}
+          isDraggable={snapshot.isDragging}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
@@ -101,9 +107,7 @@ export const Task = ({todo:{ id, completed, task}, index}) => {
                 </svg>
               )}
             </Checking>
-            <TaskText>
-              <p>{task}</p>
-            </TaskText>
+            <p>{task}</p>
           </div>
           <DeleteButton onClick={() => removeTodoItem(id)}>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">
