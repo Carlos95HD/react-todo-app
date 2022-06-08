@@ -19,8 +19,17 @@ export const Title = styled.div`
   padding-bottom: 3rem;
   width: 38%;
   
+  h1 {
+    letter-spacing: 1rem;
+    font-size: 2.5rem;
+  }
+
   @media screen and (max-width: 768px) {
     width: 90%;
+
+    h1{
+      font-size: 2rem;
+    }
   }
   @media (min-width: 769px) and (max-width: 1024px) {
     width: 60%;
@@ -29,7 +38,4 @@ export const Title = styled.div`
     width: 45%;
   }
 
-  & h1 {
-    letter-spacing: 1rem;
-  }
 `;

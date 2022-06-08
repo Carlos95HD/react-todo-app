@@ -37,4 +37,14 @@ export const GlobalStyles = createGlobalStyle`
       font-family: 'Josefin Sans', sans-serif;
       font-size: 18px;
     }
+
+  @media screen and (max-width: 768px) {
+    p{
+      font-size: 16px;
+    }
+
+    ::placeholder{
+      font-size: 18px;
+    }
+  }
   `;
