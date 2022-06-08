@@ -8,16 +8,32 @@ const Checking = styled.button`
   cursor: pointer;
   border: ${({ theme }) => `1px solid ${theme.text_secondary}`};
   border-radius: 50%;
-  width: 1.8rem;
-  height: 1.8rem;
-  padding: 8px;
+  width: .5rem;
+  height: .5rem;
+  padding: 13px;
   margin-right: 1rem;
+  transition: all 0.5s linear;
+
+  :hover{
+    background:
+      ${({ theme, completed }) => 
+        completed ? ` linear-gradient(transparent 0 0) padding-box,` : `linear-gradient(${theme.bg_secondary} 0 0) padding-box,`
+      }
+      linear-gradient(125deg, hsl(192, 100%, 67%) 0%, hsl(280, 87%, 65%) 100%) border-box;
+    border: 1px solid transparent;
+  }
 
   ${({ completed }) =>
     completed &&
     ` background-color: hsl(220, 98%, 61%);
       background: linear-gradient(125deg, hsl(192, 100%, 67%) 0%, hsl(280, 87%, 65%) 100%);
-      border: none;`};
+    `};
+
+  svg{
+    position: relative;
+    bottom: 6px;
+    right: 5px;
+  }
 `;
 
 const DeleteButton = styled.button`
@@ -33,6 +49,7 @@ const DeleteButton = styled.button`
 `;
 
 const TaskLi = styled.li`
+  /* background: ${({ theme }) => theme.bg_secondary}; */
   align-items: center;
   border-bottom: ${({ theme }) => `1px solid ${theme.text_secondary}`};
   display: flex;
@@ -55,6 +72,11 @@ const TaskLi = styled.li`
   }
 `;
 
+const TaskText = styled.div`
+  p{
+    word-break: break-all;
+  }
+`
 export const Task = ({todo:{ id, completed, task}, index}) => {
   const { markAsCompleted, removeTodoItem } = useContext(CountriesContext);
   return (
@@ -69,7 +91,7 @@ export const Task = ({todo:{ id, completed, task}, index}) => {
           <div>
             <Checking onClick={() => markAsCompleted(id)} completed={completed}>
               {completed && (
-                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="9">
                   <path
                     fill="none"
                     stroke="#FFF"
@@ -79,7 +101,9 @@ export const Task = ({todo:{ id, completed, task}, index}) => {
                 </svg>
               )}
             </Checking>
-            <p>{task}</p>
+            <TaskText>
+              <p>{task}</p>
+            </TaskText>
           </div>
           <DeleteButton onClick={() => removeTodoItem(id)}>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">

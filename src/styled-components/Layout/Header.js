@@ -22,6 +22,12 @@ export const Title = styled.div`
   @media screen and (max-width: 768px) {
     width: 90%;
   }
+  @media (min-width: 769px) and (max-width: 1024px) {
+    width: 60%;
+  }
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    width: 45%;
+  }
 
   & h1 {
     letter-spacing: 1rem;

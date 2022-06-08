@@ -77,9 +77,16 @@ const TaskUl = styled.ul`
   @media screen and (max-width: 768px) {
     width: 90%;
   }
+  @media (min-width: 769px) and (max-width: 1024px) {
+    width: 60%;
+  }
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    width: 45%;
+  }
 `;
 
 const ListOptions = styled.div`
+  font-size: 16px;
   position: relative;
   bottom: 3rem;
   width: 38%;
@@ -88,9 +95,16 @@ const ListOptions = styled.div`
   border-radius: 0 0 0.5rem 0.5rem;
   box-shadow: 0px 12px 15px -2px rgba(0, 0, 0, 0.13);
   transition: all 0.5s linear;
+
   @media screen and (max-width: 768px) {
     flex-wrap: wrap;
     width: 90%;
+  }
+  @media (min-width: 769px) and (max-width: 1024px) {
+    width: 60%;
+  }
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    width: 45%;
   }
 `
 
@@ -103,8 +117,8 @@ const Remaining = styled.div`
   transition: all 0.5s linear;
 
   p{
-    color: ${({ theme }) => theme.text_gray};
-    margin-left: 1.5rem;
+    color: ${({ theme }) => theme.text_secondary};
+    margin-left: 1.3rem;
     cursor: default
   }
 
@@ -128,7 +142,8 @@ const OtherOptions = styled.div`
   }
 
   input{
-    color: ${({ theme }) => theme.text_gray};
+    font-size: 16px;
+    color: ${({ theme }) => theme.text_secondary};
     background: ${({ theme }) => theme.bg_secondary};
     margin-right: 1.5rem;
     cursor: pointer;
@@ -161,7 +176,8 @@ const BtnList = styled.div`
 `
 
 const BtnFilter = styled.input`
-  color: ${({ theme }) => theme.text_gray};
+  font-size: 16px;
+  color: ${({ theme }) => theme.text_secondary};
   font-weight: bold;
   background: ${({ theme }) => theme.bg_secondary};
   ${({ value, filter }) => value === filter && `color: hsl(220, 98%, 61%)`};
@@ -179,4 +195,5 @@ const Alert = styled.p`
   display: flex;
   justify-content: space-between;
   padding: 2rem 2rem;
+  border-bottom: ${({ theme }) => `1px solid ${theme.text_secondary}`};
 `
