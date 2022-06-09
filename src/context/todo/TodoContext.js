@@ -1,8 +1,8 @@
 import { createContext, useEffect, useReducer } from "react";
-import { types } from "../types/types";
+import { types } from "../../types/types";
 import { todoReducer } from "./todoReducer";
-import { todos } from "../data/todos";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { todos } from "../../data/todos";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 export const CountriesContext = createContext();
 const initialState = {

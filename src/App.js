@@ -3,10 +3,10 @@ import { lightTheme, darkTheme } from "./styled-components/GlobalStyles/Themes";
 import { useDarkMode } from "./hooks/useDarkMode";
 import { GlobalStyles } from "./styled-components/GlobalStyles/GlobalStyles";
 import Toggle from "./styled-components/Layout/Toggler";
-import { TasksList } from "./components/TasksList";
-import { AddTasks } from "./components/AddTasks";
+import { TasksList } from "./components/Todo/TasksList";
+import { AddTasks } from "./components/Todo/AddTasks";
 import { Header, Title } from "./styled-components/Layout/Header";
-import { CountriesProvider } from "./todo/TodoContext";
+import { CountriesProvider } from "./context/todo/TodoContext";
 import styled from "styled-components";
 import { Footer } from "./components/Footer";
 

@@ -1,8 +1,6 @@
-import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import { CountriesContext } from "../todo/TodoContext";
 
-const FormTodo = styled.form`
+export const FormTodo = styled.form`
   background: ${({ theme }) => theme.bg_secondary};
   display: flex;
   justify-content: space-between;
@@ -33,10 +31,9 @@ const FormTodo = styled.form`
   @media (min-width: 1024px) and (max-width: 1280px) {
     width: 45%;
   }
-
 `;
 
-const Round = styled.button`
+export const Round = styled.button`
   margin-right: 1rem;
   margin-left: 1rem;
   background: none;
@@ -47,30 +44,3 @@ const Round = styled.button`
   height: 1.8rem;
   padding: 13px;
 `;
-
-export const AddTasks = () => {
-  const { addTodoItem } = useContext(CountriesContext);
-  const [inputValue, setinputValue] = useState("");
-  const handleChange = (e) => {
-    setinputValue(e.target.value);
-  };
-
-  const handleAddTodo = (e) => {
-    e.preventDefault();
-    inputValue.length > 0 && addTodoItem(inputValue);
-
-    setinputValue("");
-  };
-
-  return (
-    <FormTodo onSubmit={handleAddTodo}>
-      <Round type="button" />
-      <input
-        type="text"
-        placeholder="Create a new todo..."
-        onChange={handleChange}
-        value={inputValue}
-      />
-    </FormTodo>
-  );
-};
