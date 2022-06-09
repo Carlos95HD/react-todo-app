@@ -14,15 +14,6 @@ const Checking = styled.button`
   margin-right: 1rem;
   transition: all 0.5s linear;
 
-  :hover{
-    background:
-      ${({ theme, completed }) => 
-        completed ? ` linear-gradient(transparent 0 0) padding-box,` : `linear-gradient(${theme.bg_secondary} 0 0) padding-box,`
-      }
-      linear-gradient(125deg, hsl(192, 100%, 67%) 0%, hsl(280, 87%, 65%) 100%) border-box;
-    border: 1px solid transparent;
-  }
-
   ${({ completed }) =>
     completed &&
     ` background-color: hsl(220, 98%, 61%);
@@ -33,6 +24,17 @@ const Checking = styled.button`
     position: relative;
     bottom: 6px;
     right: 5px;
+  }
+
+  @media (pointer:fine) {
+    :hover{
+    background:
+      ${({ theme, completed }) => 
+        completed ? ` linear-gradient(transparent 0 0) padding-box,` : `linear-gradient(${theme.bg_secondary} 0 0) padding-box,`
+      }
+      linear-gradient(125deg, hsl(192, 100%, 67%) 0%, hsl(280, 87%, 65%) 100%) border-box;
+    border: 1px solid transparent;
+  }
   }
 `;
 

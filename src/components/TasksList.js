@@ -146,22 +146,25 @@ const OtherOptions = styled.div`
   transition: all 0.5s linear;
   width: 50%;
 
-  @media screen and (max-width: 768px) {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
-
   input{
     font-size: 16px;
     color: ${({ theme }) => theme.text_gray};
     background: ${({ theme }) => theme.bg_secondary};
     margin-right: 1.5rem;
     cursor: pointer;
+  }
 
-    :hover{
+  @media (pointer:fine){
+    input:hover{
       color: ${({ theme }) => theme.text_gray_hover};
     }
   }
+
+  @media screen and (max-width: 768px) {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
 `
 
 const BtnList = styled.div`
@@ -195,8 +198,10 @@ const BtnFilter = styled.input`
   margin-right: .5rem;
   cursor: pointer;
 
-  :hover{
-    color: ${({ theme }) => theme.text_gray_hover};
+  @media (pointer:fine) {
+    :hover{
+      color: ${({ theme }) => theme.text_gray_hover};
+    }
   }
 `
 
