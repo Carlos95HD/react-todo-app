@@ -1,13 +1,16 @@
 import styled from "styled-components";
 
 export const Header = styled.div`
-  background-image: ${({ theme }) => theme.background};
+  background-image: ${({ theme }) => theme.background_desktop};
   background-size: cover;
-  height: 100%;
   text-align: center;
   width: 100%;
   padding-bottom: 4rem;
   transition: background-image 0.5s linear;
+
+  @media screen and (max-width: 768px) {
+    background-image: ${({ theme }) => theme.background_mobile};
+  }
 `;
 
 export const Title = styled.div`
@@ -26,7 +29,6 @@ export const Title = styled.div`
 
   @media screen and (max-width: 768px) {
     width: 90%;
-
     h1{
       font-size: 2rem;
     }

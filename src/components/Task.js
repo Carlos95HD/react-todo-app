@@ -37,6 +37,7 @@ const Checking = styled.button`
 `;
 
 const DeleteButton = styled.button`
+  visibility: hidden;
   background-color: transparent;
   border: none;
   border-radius: 50%;
@@ -46,6 +47,10 @@ const DeleteButton = styled.button`
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+
+  @media (pointer:coarse) {
+    visibility: visible;
+  }
 `;
 
 const TaskLi = styled.li`
@@ -79,6 +84,14 @@ const TaskLi = styled.li`
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
     border: 1px solid ${theme.text_secondary}
     `
+  }
+
+  &:hover ${DeleteButton}{
+    visibility: visible;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: .6rem;
   }
 `;
 

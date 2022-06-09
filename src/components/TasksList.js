@@ -60,6 +60,7 @@ export const TasksList = () => {
           <input type="button" value={"Clear Completed"} onClick={ () => clearCompleted() }/>
         </OtherOptions>
       </ListOptions>
+      <HelpText>Drag and drop to reorder list</HelpText>
     </DragDropContext>
   );
 };
@@ -126,7 +127,7 @@ const Remaining = styled.div`
   transition: all 0.5s linear;
 
   p{
-    color: ${({ theme }) => theme.text_secondary};
+    color: ${({ theme }) => theme.text_gray};
     margin-left: 1.3rem;
     cursor: default
   }
@@ -152,7 +153,7 @@ const OtherOptions = styled.div`
 
   input{
     font-size: 16px;
-    color: ${({ theme }) => theme.text_secondary};
+    color: ${({ theme }) => theme.text_gray};
     background: ${({ theme }) => theme.bg_secondary};
     margin-right: 1.5rem;
     cursor: pointer;
@@ -186,7 +187,7 @@ const BtnList = styled.div`
 
 const BtnFilter = styled.input`
   font-size: 16px;
-  color: ${({ theme }) => theme.text_secondary};
+  color: ${({ theme }) => theme.text_gray};
   font-weight: bold;
   background: ${({ theme }) => theme.bg_secondary};
   ${({ value, filter }) => value === filter && `color: hsl(220, 98%, 61%)`};
@@ -205,4 +206,14 @@ const Alert = styled.p`
   justify-content: space-between;
   padding: 2rem 2rem;
   border-bottom: ${({ theme }) => `1px solid ${theme.text_secondary}`};
+`
+
+const HelpText = styled.p`
+  color: ${({ theme }) => theme.text_gray};
+  text-align: center;
+  cursor: default;
+
+  @media screen and (max-width: 768px) {
+    margin-top: 4rem;
+  }
 `

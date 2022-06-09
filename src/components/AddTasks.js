@@ -17,7 +17,14 @@ const FormTodo = styled.form`
   -webkit-box-shadow: 0px 12px 34px -2px rgba(0, 0, 0, 0.13);
   -moz-box-shadow: 0px 12px 34px -2px rgba(0, 0, 0, 0.13);
 
+  & input {
+    background: none;
+    width: 100%;
+  }
+
   @media screen and (max-width: 768px) {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     width: 90%;
   }
   @media (min-width: 769px) and (max-width: 1024px) {
@@ -27,10 +34,6 @@ const FormTodo = styled.form`
     width: 45%;
   }
 
-  & input {
-    background: none;
-    width: 100%;
-  }
 `;
 
 const Round = styled.button`

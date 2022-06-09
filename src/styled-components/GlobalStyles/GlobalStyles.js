@@ -32,6 +32,17 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-appearance: none;
   }
 
+  footer{
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    margin-bottom: 1rem;
+
+    a, a:visited {
+      color: hsl(220, 98%, 61%);
+    }
+  }
+
   ::placeholder{
       color: ${({ theme }) => theme.text_gray};
       font-family: 'Josefin Sans', sans-serif;
@@ -45,6 +56,10 @@ export const GlobalStyles = createGlobalStyle`
 
     ::placeholder{
       font-size: 18px;
+    }
+
+    footer{
+      font-size: 12px;
     }
   }
   `;
