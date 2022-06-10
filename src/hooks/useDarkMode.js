@@ -13,7 +13,7 @@ export const useDarkMode = () => {
 
     useEffect(() => {
         const localTheme = window.localStorage.getItem('theme');
-        localTheme ? setTheme(localTheme) : setMode('light')
+        localTheme ? setTheme(localTheme) : setMode('dark')
         setMountedComponent(true)
     }, []);
 
