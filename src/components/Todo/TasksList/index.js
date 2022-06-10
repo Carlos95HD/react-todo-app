@@ -5,11 +5,14 @@ import { Task } from "../Task";
 import { filterItem} from "../../../helpers/filterItem";
 import { reorderItems, reorderItemsFiltered } from "../../../helpers/reorderItems";
 import { Alert, BtnFilter, BtnList, HelpText, ListOptions, OtherOptions, Remaining, TaskUl } from "./styles";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export const TasksList = () => {
   const { todoList, clearCompleted, updateList } = useContext(CountriesContext);
   const [ todoFiltered, setTodoFiltered ] = useState([]);
   const [ filter, setfilter ] = useState('All');
+  const toastCompleted = () => toast.success("Cleared successfully", { theme:"colored" });
 
   useEffect(() => {
     const itemsFiltered = filterItem(todoList, filter);
@@ -31,9 +34,17 @@ export const TasksList = () => {
       const newList = reorderItemsFiltered( todoFiltered ,todoList, selectedIndex, destineIndex)
       updateList(newList);
     }
-
     setTodoFiltered(reoreredList)
   }
+
+  const handleClearCompleted = () => {
+    const existsCompleted = todoList.some(item => item.completed);
+    if (existsCompleted) {
+      clearCompleted();
+      toastCompleted();
+    }
+  }
+
   const itemsLeft = todoList?.filter(todo => !todo.completed);
 
   return (
@@ -57,10 +68,11 @@ export const TasksList = () => {
           <BtnFilter type="button" filter={filter} value={"Completed"} onClick={({target}) => setfilter(target.value)}/>
         </BtnList>
         <OtherOptions>
-          <input type="button" value={"Clear Completed"} onClick={ () => clearCompleted() }/>
+          <input type="button" value={"Clear Completed"} onClick={ handleClearCompleted }/>
         </OtherOptions>
       </ListOptions>
       <HelpText>Drag and drop to reorder list</HelpText>
+      <ToastContainer position="bottom-right"/>
     </DragDropContext>
   );
 };
